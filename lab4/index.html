@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Лабораторная работа №4 - Работа с DOM и событиями</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Инвентарь</h1>
+  
+  <form id="itemForm">
+    <div>
+      <label for="itemName">Название предмета:</label>
+      <input type="text" id="itemName" required>
+    </div>
+    <div>
+      <label for="itemCategory">Категория:</label>
+      <select id="itemCategory">
+        <option value="armor">Броня</option>
+        <option value="weapon">Оружие</option>
+        <option value="potion">Зелье</option>
+      </select>
+    </div>
+    <div id="damageField" style="display: none;">
+      <label for="itemDamage">Урон (для оружия):</label>
+      <input type="number" id="itemDamage">
+    </div>
+    <div>
+      <label for="itemRarity">Редкость:</label>
+      <select id="itemRarity">
+        <option value="common">Обычный</option>
+        <option value="uncommon">Необычный</option>
+        <option value="rare">Редкий</option>
+        <option value="legendary">Легендарный</option>
+      </select>
+    </div>
+    <div>
+      <label for="itemDescriptionInput">Описание:</label>
+      <textarea id="itemDescriptionInput" rows="3"></textarea>
+    </div>
+    <button type="submit">Добавить предмет</button>
+  </form>
+  
+  <h2 id="totalItems">Всего предметов: 0</h2>
+  
+  <table id="inventoryTable" border="1" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Редкость</th>
+        <th>Урон</th>
+        <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody id="inventoryTableBody">
+    </tbody>
+  </table>
+  
+  <div id="itemDescriptionDisplay" style="margin-top:20px; padding:10px; border:1px solid #ccc;"></div>
+  
+  <!-- Подключаем основной модуль JavaScript -->
+  <script type="module" src="./src/index.js"></script>
+  
+  <!-- Дополнительный скрипт для управления отображением поля "Урон" в форме -->
+  <script>
+    const itemCategorySelect = document.getElementById('itemCategory');
+    const damageField = document.getElementById('damageField');
+    itemCategorySelect.addEventListener('change', () => {
+      if (itemCategorySelect.value === 'weapon') {
+        damageField.style.display = 'block';
+      } else {
+        damageField.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
